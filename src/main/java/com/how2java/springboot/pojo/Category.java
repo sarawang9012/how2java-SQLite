@@ -1,5 +1,6 @@
 package com.how2java.springboot.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.lang.annotation.Target;
@@ -16,6 +17,7 @@ import java.lang.annotation.Target;
  */
 @Entity
 @Table(name="category_")
+@JsonIgnoreProperties({"handler","hibernateLazyInitializer"})
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
