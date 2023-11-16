@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product Category List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/style.css"
+          th:href="@{css/style.css}"/>
+    <script type="text/javascript" src="../static/js/thymeleaf.js"
+            th:src="@{js/thymeleaf.js}"></script>
+    <script type="text/javascript" src="../static/js/jquery.min.js"
+            th:src="@{js/jquery.min.js}"></script>
+    <script>
+        $(function(){
+            $(".delete").click(function(){
+                var href=$(this).attr("href");
+                $("#formdelete").attr({action:href}).submit();
+                return false;
+            })
+        })
+    </script>
+</head>
+<body>
+<div class="showing">
+
+</div>
+
+<div style="width:500px;margin:20px auto;text-align: center">
+<table >
+    <thead>
+    <tr>
+        <td>id</td>
+        <td>name</td>
+        <td>edit</td>
+        <td>delete</td>
+    </tr>
+    </thead>
+        <tr th:each="p: ${page}">
+            <td th:text="${p.id}"></td>
+            <td th:text="${p.name}"></td>
+            <td>
+                <a th:href="@{/categories/{id}(id=${p.id})}">edit</a>
+                </td>
+            <td><a class="delete" th:href="@{/categories/{id}(id=${p.id})}">delete</a> </td>
+        </tr>
+</table>
+<br>
+<div>
+    <a th:href="@{/categories(start=0)}">Index</a>
+    <a th:href="@{/categories(start=${prev})}">Prev</a>
+    <a th:href="@{/categories(start=${next})}">next</a>
+    <a th:href="@{/categories(start=${pages})}">Last</a>
+</div>
+<br>
+<form action="categories" method="post">
+    name:<input name="name"><br>
+    <button type="submit">Submit</button>
+</form>
+    <form id="formdelete" action="" method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+    </form>
+</div>
+</body>
+</html>

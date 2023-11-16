@@ -1,0 +1,10 @@
+<div style="margin:0px auto; width:500px">
+
+    <form th:action="@{/categories/{id}(id=${c.id})}" method="post">
+
+        <input type="hidden" name="_method" value="PUT">
+        name: <input name="name" th:value="${c.name}"> <br>
+        <button type="submit">提交</button>
+
+    </form>
+</div>
